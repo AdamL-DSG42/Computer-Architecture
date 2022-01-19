@@ -1,0 +1,44 @@
+00001000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 19/01/2022 16:29:14
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :  Part 1
+00000000                             3  * Written by :  Adam Lambert
+00000000                             4  * Date       :  19/01/2022
+00000000                             5  * Description:  Input and output of number
+00000000                             6  *-----------------------------------------------------------
+00000000                             7  
+00001000                             8      ORG    $1000
+00001000                             9  START: 
+00001000  43F9 00001028             10      LEA message, A1                 
+00001006  103C 000E                 11      MOVE.B #14, D0
+0000100A  4E4F                      12      TRAP #15
+0000100C                            13      
+0000100C  103C 0004                 14      MOVE.B #4, D0
+00001010  4E4F                      15      TRAP #15
+00001012                            16  
+00001012  43F9 00001042             17      LEA text, A1
+00001018  103C 000E                 18      MOVE.B #14, D0
+0000101C  4E4F                      19      TRAP #15
+0000101E                            20      
+0000101E  103C 0003                 21      MOVE.B #3, D0
+00001022  4E4F                      22      TRAP #15
+00001024                            23  
+00001024  FFFF FFFF                 24      SIMHALT             
+00001028                            25  
+00001028= 45 6E 74 65 72 20 ...     26  message dc.b 'Enter your gamer points: ', 0
+00001042= 59 6F 75 72 20 67 ...     27  text dc.b 'Your gamer points are: ', 0
+0000105A                            28  
+0000105A                            29      END    START        
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+MESSAGE             1028
+START               1000
+TEXT                1042
