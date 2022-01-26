@@ -1,0 +1,69 @@
+00001000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 26/01/2022 15:54:32
+
+00000000                             1  *-----------------------------------------------------------------------------------------
+00000000                             2  * Title      :  Part 2
+00000000                             3  * Written by :  Adam Lambert
+00000000                             4  * Date       :  19/01/2022
+00000000                             5  * Description:  Demonstrate indirect addressing and display health using Address Register
+00000000                             6  *-----------------------------------------------------------------------------------------
+00000000                             7  
+00001000                             8      ORG    $1000
+00001000                             9  START: 
+00001000  45F9 0000105A             10      LEA Health, A2
+00001006  43F9 0000105B             11      LEA HealthMessage, A1
+0000100C                            12      
+0000100C                            13      *Output intial health
+0000100C  1212                      14      MOVE.B (A2), D1
+0000100E  103C 0011                 15      MOVE.B #17, D0
+00001012  4E4F                      16      TRAP #15
+00001014                            17      
+00001014                            18      *Add 5 to health
+00001014  5A41                      19      ADD #5, D1
+00001016  13C1 0000105A             20      MOVE.B D1, Health
+0000101C                            21      
+0000101C  103C 0011                 22      MOVE.B #17, D0
+00001020  4E4F                      23      TRAP #15
+00001022                            24      
+00001022                            25      *Subtract 5 from health
+00001022  1212                      26      MOVE.B (A2), D1
+00001024  5B41                      27      SUB #5, D1
+00001026  13C1 0000105A             28      MOVE.B D1, Health
+0000102C                            29      
+0000102C  103C 0011                 30      MOVE.B #17, D0
+00001030  4E4F                      31      TRAP #15
+00001032                            32      
+00001032                            33      *Multiply health by 2
+00001032  1212                      34      MOVE.B (A2), D1
+00001034  C2FC 0002                 35      MULU #2, D1
+00001038  13C1 0000105A             36      MOVE.B D1, Health
+0000103E                            37  
+0000103E  103C 0011                 38      MOVE.B #17, D0
+00001042  4E4F                      39      TRAP #15
+00001044                            40      
+00001044                            41      *Divide health by 2
+00001044  1212                      42      MOVE.B (A2), D1
+00001046  82FC 0002                 43      DIVU #2, D1
+0000104A  13C1 0000105A             44      MOVE.B D1, Health
+00001050                            45      
+00001050  103C 0011                 46      MOVE.B #17, D0
+00001054  4E4F                      47      TRAP #15
+00001056                            48  
+00001056  FFFF FFFF                 49      SIMHALT             
+0000105A                            50  
+0000105A= 10                        51  Health dc.b $10
+0000105B= 48 65 61 6C 74 68 ...     52  HealthMessage dc.b 'Health: ', 0
+00001064                            53  
+00001064                            54      END    START  
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+HEALTH              105A
+HEALTHMESSAGE       105B
+START               1000

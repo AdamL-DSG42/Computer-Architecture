@@ -8,31 +8,52 @@
     ORG    $1000
 START: 
     LEA Health, A2
-    MOVE.B #95, Health
+    LEA HealthMessage, A1
+    
+    *Output intial health
     MOVE.B (A2), D1
-    
-    LEA currentHealth, A1
-    MOVE.B #14, D0
+    MOVE.B #17, D0
     TRAP #15
     
-    MOVE.B #3, D0
+    *Add 5 to health
+    ADD #5, D1
+    MOVE.B D1, Health
+    
+    MOVE.B #17, D0
     TRAP #15
     
-    ADD.B #5, (A2)
+    *Subtract 5 from health
     MOVE.B (A2), D1
+    SUB #5, D1
+    MOVE.B D1, Health
     
-    MOVE.B #14, D0
+    MOVE.B #17, D0
     TRAP #15
     
-    MOVE.B #3, D0
+    *Multiply health by 2
+    MOVE.B (A2), D1
+    MULU #2, D1
+    MOVE.B D1, Health
+
+    MOVE.B #17, D0
+    TRAP #15
+    
+    *Divide health by 2
+    MOVE.B (A2), D1
+    DIVU #2, D1
+    MOVE.B D1, Health
+    
+    MOVE.B #17, D0
     TRAP #15
 
     SIMHALT             
 
 Health dc.b $10
-currentHealth dc.b 'Current Health: ', 0
+HealthMessage dc.b 'Health: ', 0
 
     END    START  
+
+
 *~Font name~Courier New~
 *~Font size~10~
 *~Tab type~1~
